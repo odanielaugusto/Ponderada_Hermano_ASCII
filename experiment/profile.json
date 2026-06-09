@@ -1,0 +1,6 @@
+{
+  "scenario": "baseline",
+  "extra_cases": 0,
+  "slow_ms": 0,
+  "force_failure": false
+}
