@@ -1,6 +1,6 @@
 {
-  "scenario": "parallel-restored",
-  "extra_cases": 8,
+  "scenario": "large-test-set",
+  "extra_cases": 25,
   "slow_ms": 0,
   "force_failure": false
 }
