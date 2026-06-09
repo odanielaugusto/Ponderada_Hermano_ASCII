@@ -1,6 +1,6 @@
 {
-  "scenario": "slow-tests",
+  "scenario": "cache-off",
   "extra_cases": 8,
-  "slow_ms": 1200,
+  "slow_ms": 0,
   "force_failure": false
 }
