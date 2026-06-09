@@ -1,6 +1,6 @@
 {
-  "scenario": "heavier-slow-test",
-  "extra_cases": 25,
-  "slow_ms": 2500,
+  "scenario": "stable-final",
+  "extra_cases": 4,
+  "slow_ms": 0,
   "force_failure": false
 }
