@@ -1,5 +1,5 @@
 {
-  "scenario": "failure-fixed",
+  "scenario": "sequential-jobs",
   "extra_cases": 8,
   "slow_ms": 0,
   "force_failure": false
