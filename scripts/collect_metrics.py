@@ -27,7 +27,9 @@ CSV_COLUMNS = [
     "step_duration",
     "test_count",
     "test_failures",
+    "test_duration",
     "test_average_time",
+    "test_data_source",
     "timestamp",
     "scenario",
     "html_url",
@@ -66,7 +68,11 @@ def main() -> int:
             args.repo,
             run.get("head_sha", ""),
         )
-        test_data = metadata.get("tests") or infer_test_data(profile, jobs)
+        test_data = metadata.get("tests")
+        if test_data:
+            test_data = {**test_data, "source": "artifact_run_metadata"}
+        else:
+            test_data = infer_test_data(profile, jobs)
         workflow_duration = seconds_between(run.get("run_started_at"), run.get("updated_at"))
 
         for job in jobs:
@@ -91,7 +97,9 @@ def main() -> int:
                         ),
                         "test_count": test_data.get("count", ""),
                         "test_failures": test_data.get("failures", ""),
+                        "test_duration": test_data.get("duration", ""),
                         "test_average_time": test_data.get("average", ""),
+                        "test_data_source": test_data.get("source", ""),
                         "timestamp": run.get("run_started_at", ""),
                         "scenario": profile.get("scenario", ""),
                         "html_url": run.get("html_url", ""),
@@ -222,7 +230,9 @@ def infer_test_data(profile: dict[str, Any], jobs: list[dict[str, Any]]) -> dict
     return {
         "count": count,
         "failures": failures,
+        "duration": round(pytest_duration, 3),
         "average": round(average, 3),
+        "source": "commit_profile_and_step_duration",
     }
 
 

@@ -3,6 +3,10 @@
 Pasta simples para os artefatos finais da atividade.
 
 - `metricas_pipeline.csv`: base gerada por `scripts/collect_metrics.py`.
+  O formato e longo: cada linha representa uma etapa de um job em um run real.
+  Assim, os dados de run e testes se repetem nas linhas de cada etapa.
+  A coluna `test_data_source` informa se os dados de teste vieram do artefato do
+  workflow ou do fallback automatico por commit.
 - `graficos/`: imagens geradas por `scripts/generate_charts.py`.
 - `relatorio.md`: analise tecnica com evidencias reais do GitHub Actions.
 

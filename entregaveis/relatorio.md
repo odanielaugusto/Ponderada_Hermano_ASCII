@@ -43,7 +43,15 @@ Foram coletadas 12 execucoes reais do GitHub Actions em 9 de junho de 2026.
 
 O CSV contem `run_id`, commit, mensagem do commit, status, duracao total do
 workflow, duracao por job, duracao por etapa, quantidade de testes, falhas,
-tempo medio aproximado dos testes, timestamp, cenario e link do run.
+duracao dos testes, tempo medio aproximado dos testes, fonte dos dados de teste,
+timestamp, cenario e link do run.
+
+Nesta coleta local, `test_data_source` ficou como
+`commit_profile_and_step_duration`: o script consultou runs/jobs/steps reais pela
+API do GitHub, leu o `experiment/profile.json` de cada commit real e calculou
+`test_average_time` a partir da duracao real da etapa `Run Pytest`. Com
+`GITHUB_TOKEN`, o mesmo script baixa os artefatos do workflow e usa
+`run-metadata.json` como fonte (`artifact_run_metadata`), que e mais precisa.
 
 Resumo por execucao:
 
@@ -122,10 +130,12 @@ por run como artefato para eliminar inferencias locais.
 
 A amostra tem apenas 12 execucoes e usa runners hospedados pelo GitHub, sujeitos a
 variacao externa. Sem token local, a API publica permitiu coletar runs/jobs, mas
-nao baixar o ZIP dos artefatos, que retornou 401. Por isso, `test_count` e
-`test_failures` foram inferidos a partir do `experiment/profile.json` de cada
-commit real, e `test_average_time` foi aproximado pela duracao da etapa
-`Run Pytest` dividida pela quantidade de testes.
+nao baixar o ZIP dos artefatos, que retornou 401. Por isso, nesta versao do CSV,
+`test_count` e `test_failures` foram inferidos a partir do `experiment/profile.json`
+de cada commit real, e `test_average_time` foi aproximado pela duracao da etapa
+`Run Pytest` dividida pela quantidade de testes. Essa duracao de etapa e
+arredondada em segundos pelo GitHub Actions, entao valores `0.0` indicam etapas
+abaixo de 1 s, nao ausencia de execucao.
 
 ### Como essa analise poderia apoiar decisoes de engenharia?
 
