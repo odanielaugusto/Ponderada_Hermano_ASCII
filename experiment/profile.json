@@ -1,6 +1,6 @@
 {
-  "scenario": "cache-restored",
+  "scenario": "controlled-failure",
   "extra_cases": 8,
   "slow_ms": 0,
-  "force_failure": false
+  "force_failure": true
 }
