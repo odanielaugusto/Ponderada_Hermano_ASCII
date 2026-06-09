@@ -1,5 +1,5 @@
 {
-  "scenario": "sequential-jobs",
+  "scenario": "parallel-restored",
   "extra_cases": 8,
   "slow_ms": 0,
   "force_failure": false
