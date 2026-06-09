@@ -1,6 +1,6 @@
 {
-  "scenario": "controlled-failure",
+  "scenario": "failure-fixed",
   "extra_cases": 8,
   "slow_ms": 0,
-  "force_failure": true
+  "force_failure": false
 }
